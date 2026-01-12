@@ -1,0 +1,15 @@
+IMPORTANT : Pour que le logo s'affiche correctement :
+
+1. Placez votre fichier image dans ce dossier (frontend/public/)
+2. Nommez-le exactement : logo.jpeg
+3. Emplacement complet : frontend/public/logo.jpeg
+
+Format accepté : .jpeg, .jpg, .png
+
+Si votre fichier a un autre nom, modifiez frontend/src/components/Logo.tsx :
+- Changez "/logo.jpeg" par "/votre-nom-de-fichier.jpeg"
+
+Après avoir placé l'image :
+- Rechargez la page du navigateur (F5 ou Ctrl+R)
+- Si nécessaire, redémarrez le serveur Next.js
+
