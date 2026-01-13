@@ -1,3 +1,102 @@
+/* ============================================
+   PALETTE DE COULEURS HARMONIEUSE
+   ============================================ */
+
+:root {
+  /* Couleurs principales - Basées sur le logo */
+  /* Orange du logo (orange vif et vibrant) */
+  --color-primary: #FF6600;        /* Orange principal du logo */
+  --color-primary-light: #FF8533;  /* Orange clair */
+  --color-primary-lighter: #FFAA66; /* Orange très clair */
+  --color-primary-dark: #E55A00;   /* Orange foncé */
+  --color-primary-darker: #CC4D00; /* Orange très foncé */
+  
+  /* Noir du logo */
+  --color-black: #000000;          /* Noir pur du logo */
+  --color-black-soft: #1A1A1A;     /* Noir adouci pour fonds */
+  --color-black-light: #2D2D2D;    /* Noir clair pour éléments */
+  
+  /* Blanc du logo */
+  --color-white: #FFFFFF;          /* Blanc pur */
+  --color-white-soft: #FAFAFA;     /* Blanc adouci */
+  
+  /* Couleurs secondaires - Complémentaires */
+  --color-secondary: #4ECDC4;      /* Turquoise/cyan */
+  --color-secondary-light: #6EDDD6;
+  --color-secondary-dark: #3AB5AE;
+  
+  /* Couleurs d'accent */
+  --color-accent: #FFD93D;         /* Jaune doré */
+  --color-accent-light: #FFE66D;
+  
+  /* Couleurs neutres - Adaptées au logo */
+  --color-background: #FFFFFF;     /* Fond principal blanc */
+  --color-background-light: #FAFAFA;
+  --color-background-dark: #F5F5F5;
+  --color-background-alt: #1A1A1A; /* Fond alternatif noir (pour sections spéciales) */
+  
+  /* Couleurs de texte */
+  --color-text-primary: #000000;   /* Texte principal noir (comme le logo) */
+  --color-text-secondary: #4A4A4A; /* Texte secondaire */
+  --color-text-light: #7A7A7A;     /* Texte léger */
+  --color-text-white: #FFFFFF;     /* Texte blanc */
+  --color-text-orange: #FF6600;    /* Texte orange (comme le logo) */
+  
+  /* Couleurs de bordure */
+  --color-border: #E0E0E0;
+  --color-border-light: #F0F0F0;
+  --color-border-dark: #CCCCCC;
+  --color-border-orange: rgba(255, 102, 0, 0.2); /* Bordure orange subtile */
+  
+  /* Couleurs de statut */
+  --color-success: #10B981;        /* Vert succès */
+  --color-warning: #FF6600;        /* Orange avertissement (couleur du logo) */
+  --color-error: #EF4444;          /* Rouge erreur */
+  --color-info: #3B82F6;           /* Bleu info */
+  
+  /* Ombres */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-primary: 0 4px 12px rgba(255, 102, 0, 0.3);
+  --shadow-primary-lg: 0 8px 24px rgba(255, 102, 0, 0.4);
+  --shadow-black: 0 4px 12px rgba(0, 0, 0, 0.2);
+  
+  /* Dégradés - Basés sur les couleurs du logo */
+  --gradient-primary: linear-gradient(135deg, #FF6600 0%, #FF8533 50%, #FFAA66 100%);
+  --gradient-primary-reverse: linear-gradient(135deg, #FFAA66 0%, #FF8533 50%, #FF6600 100%);
+  --gradient-hero: linear-gradient(135deg, #FF6600 0%, #FF8533 40%, #FFAA66 80%, #FFD93D 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(255, 102, 0, 0.15) 0%, rgba(255, 133, 51, 0.12) 50%, rgba(255, 170, 102, 0.1) 100%);
+  --gradient-black: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+  --gradient-black-orange: linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #FF6600 100%);
+  
+  /* Espacements */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* Bordures */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -45,8 +144,41 @@
   }
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -56,25 +188,139 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  background: var(--color-background);
+  color: var(--color-text-primary);
   min-height: 100vh;
+  line-height: 1.6;
 }
 
-/* Scrollbar personnalisée */
+/* ============================================
+   SCROLLBAR PERSONNALISÉE
+   ============================================ */
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-background-dark);
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff6600 0%, #ff8533 100%);
-  border-radius: 5px;
+  background: var(--gradient-primary);
+  border-radius: 6px;
+  border: 2px solid var(--color-background-dark);
+  transition: all var(--transition-base);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff8533 0%, #ff6600 100%);
+  background: var(--gradient-primary-reverse);
+  border: 2px solid var(--color-background);
 }
 
+/* ============================================
+   UTILITAIRES
+   ============================================ */
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.bg-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-primary-solid {
+  background-color: var(--color-primary);
+}
+
+.shadow-primary {
+  box-shadow: var(--shadow-primary);
+}
+
+.shadow-primary-lg {
+  box-shadow: var(--shadow-primary-lg);
+}
+
+/* ============================================
+   RESPONSIVE - BREAKPOINTS
+   ============================================ */
+
+/* Mobile First Approach */
+/* 
+  - Mobile: < 640px (sm)
+  - Tablette: 640px - 1024px (md, lg)
+  - Desktop: > 1024px (xl, 2xl)
+*/
+
+/* Variables responsive */
+@media (max-width: 640px) {
+  :root {
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --spacing-lg: 20px;
+    --spacing-xl: 28px;
+    --spacing-2xl: 40px;
+    --spacing-3xl: 56px;
+  }
+}
+
+/* ============================================
+   UTILITAIRES RESPONSIVE
+   ============================================ */
+
+/* Masquer sur mobile */
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Masquer sur desktop */
+@media (min-width: 1025px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+/* Container responsive */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1400px;
+  }
+}

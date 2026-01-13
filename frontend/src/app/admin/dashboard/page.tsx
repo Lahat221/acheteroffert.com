@@ -55,9 +55,9 @@ export default function AdminDashboardPage() {
     try {
       // Charge les statistiques depuis les différentes APIs
       const [vendorsRes, offersRes, adminsRes] = await Promise.all([
-        fetch('http://localhost:3001/vendors').catch(() => null),
-        fetch('http://localhost:3001/offers').catch(() => null),
-        fetch('http://localhost:3001/auth/admin').catch(() => null),
+        fetch(`${API_URL}/vendors`).catch(() => null),
+        fetch(`${API_URL}/offers`).catch(() => null),
+        fetch(`${API_URL}/auth/admin`).catch(() => null),
       ]);
 
       const vendors = vendorsRes ? await vendorsRes.json().catch(() => []) : [];
@@ -266,6 +266,7 @@ export default function AdminDashboardPage() {
     </div>
   );
 }
+
 
 
 

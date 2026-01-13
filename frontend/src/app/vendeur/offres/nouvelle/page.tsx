@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import { API_URL } from '@/config/api';
 
 const CATEGORIES = [
   { value: 'restauration', label: '🍽️ Restauration' },
@@ -152,7 +153,7 @@ export default function CreateOfferPage() {
       formData.append('image', file);
 
       // Upload l'image
-      const response = await fetch('http://localhost:3001/upload/image', {
+      const response = await fetch(`${API_URL}/upload/image`, {
         method: 'POST',
         body: formData,
       });
@@ -236,7 +237,7 @@ export default function CreateOfferPage() {
       // Appel à l'API backend
       console.log('📤 Envoi des données de l\'offre:', offerData);
       
-      const response = await fetch('http://localhost:3001/offers', {
+      const response = await fetch(`${API_URL}/offers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

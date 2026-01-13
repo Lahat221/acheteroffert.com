@@ -33,7 +33,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
         key={i}
         style={{
           // Si l'index est inférieur à la note, l'étoile est dorée, sinon grise
-          color: i < rating ? '#ffc107' : '#ddd',
+          color: i < rating ? '#FFD93D' : '#E1E8ED',
           fontSize: '18px',
         }}
       >
@@ -45,8 +45,8 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
   return (
     <section
       style={{
-        padding: '60px 20px',
-        backgroundColor: '#f8f9fa',
+        padding: 'clamp(40px, 6vh, 60px) clamp(16px, 4vw, 20px)',
+        backgroundColor: '#FAFAFA',
       }}
     >
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
@@ -54,26 +54,26 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <h2
             style={{
-              fontSize: 'clamp(28px, 4vw, 40px)',
+              fontSize: 'clamp(24px, 5vw, 40px)',
               fontWeight: '800',
-              color: '#333',
+              color: '#000000',
               marginBottom: '12px',
             }}
           >
             💬 Témoignages clients
           </h2>
-          <p style={{ fontSize: '18px', color: '#666' }}>
+          <p style={{ fontSize: 'clamp(14px, 2.5vw, 18px)', color: '#4A4A4A' }}>
             Découvrez ce que nos clients disent de nos partenaires
           </p>
         </div>
 
         {/* Grille de témoignages */}
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-            gap: '24px',
-          }}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: '20px',
+        }}
         >
           {testimonials.map((testimonial) => (
             <div
@@ -82,19 +82,19 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 backgroundColor: '#fff',
                 padding: '24px',
                 borderRadius: '12px',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-                border: '1px solid #e0e0e0',
+                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
+                border: '1px solid #E0E0E0',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 display: 'flex',
                 flexDirection: 'column',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.12)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
+                e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.08)';
               }}
             >
               {/* En-tête avec nom du commerce */}
@@ -111,7 +111,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                     style={{
                       fontSize: '18px',
                       fontWeight: '700',
-                      color: '#333',
+                      color: '#000000',
                       margin: 0,
                     }}
                   >
@@ -120,7 +120,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                   {testimonial.verified && (
                     <span
                       style={{
-                        backgroundColor: '#4caf50',
+                        background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
                         color: 'white',
                         padding: '4px 8px',
                         borderRadius: '4px',
@@ -135,7 +135,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 <p
                   style={{
                     fontSize: '13px',
-                    color: '#999',
+                    color: '#7F8C9A',
                     margin: 0,
                   }}
                 >
@@ -149,8 +149,8 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
               {/* Commentaire */}
               <p
                 style={{
-                  fontSize: '15px',
-                  color: '#555',
+                  fontSize: 'clamp(13px, 2vw, 15px)',
+                  color: '#4A4A4A',
                   lineHeight: '1.6',
                   marginBottom: '16px',
                   flex: 1,
@@ -175,7 +175,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                     style={{
                       fontSize: '14px',
                       fontWeight: '600',
-                      color: '#333',
+                      color: '#000000',
                       margin: 0,
                     }}
                   >
@@ -185,7 +185,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 <p
                   style={{
                     fontSize: '12px',
-                    color: '#999',
+                    color: '#7F8C9A',
                     margin: 0,
                   }}
                 >

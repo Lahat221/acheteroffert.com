@@ -34,8 +34,8 @@ export default async function HomePage() {
         {/* Hero Section avec gradient */}
         <section
           style={{
-            background: 'linear-gradient(135deg, #ff6600 0%, #ff8533 50%, #ffaa66 100%)',
-            padding: '40px 0',
+            background: 'linear-gradient(135deg, #FF6600 0%, #FF8533 40%, #FFAA66 80%, #FFD93D 100%)',
+            padding: 'clamp(12px, 2vh, 20px) 0',
             textAlign: 'center',
             position: 'relative',
             overflow: 'hidden',
@@ -68,37 +68,13 @@ export default async function HomePage() {
           />
 
           <div style={{ width: '100%', position: 'relative', zIndex: 1 }}>
-            {/* Carrousel avec tout le contenu intégré */}
+            {/* Carrousel avec tout le contenu intégré (stats incluses) */}
             <HeroCarousel />
-
-            {/* Stats rapides */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '40px',
-                flexWrap: 'wrap',
-                animation: 'fadeInUp 1s ease 0.6s both',
-              }}
-            >
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'white' }}>7+</div>
-                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.9)' }}>Offres actives</div>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'white' }}>1</div>
-                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.9)' }}>Ville</div>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'white' }}>9</div>
-                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.9)' }}>Catégories</div>
-              </div>
-            </div>
           </div>
         </section>
 
         {/* Contenu principal */}
-        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 20px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '40px 16px' }}>
           {/* Liste des offres avec filtres */}
           <OffersList initialOffers={offers} />
         </div>

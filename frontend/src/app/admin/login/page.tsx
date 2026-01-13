@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
 
     try {
       // Appel à l'API backend pour se connecter
-      const response = await fetch('http://localhost:3001/auth/admin/login', {
+      const response = await fetch(`${API_URL}/auth/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -230,6 +230,7 @@ export default function AdminLoginPage() {
     </div>
   );
 }
+
 
 
 

@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import { API_URL } from '@/config/api';
 
 export default function VendorLoginPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function VendorLoginPage() {
 
     try {
       // Appel à l'API backend pour se connecter
-      const response = await fetch('http://localhost:3001/vendors/login', {
+      const response = await fetch(`${API_URL}/vendors/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,11 +37,12 @@ export default function VendorLoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || 'Erreur de connexion');
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || `Erreur ${response.status}: ${response.statusText}`);
       }
+
+      const data = await response.json();
 
       // Sauvegarde les informations du vendeur dans le localStorage
       localStorage.setItem('vendor', JSON.stringify(data));
@@ -49,7 +51,13 @@ export default function VendorLoginPage() {
       // Redirige vers le dashboard
       router.push('/vendeur/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Une erreur est survenue');
+      // Gestion spécifique des erreurs de connexion réseau
+      if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+        setError('Impossible de se connecter au serveur. Vérifiez que le backend est démarré sur le port 3001.');
+      } else {
+        setError(err.message || 'Une erreur est survenue');
+      }
+      console.error('Erreur de connexion:', err);
     } finally {
       setLoading(false);
     }
@@ -232,6 +240,7 @@ export default function VendorLoginPage() {
     </div>
   );
 }
+
 
 
 

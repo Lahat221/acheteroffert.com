@@ -140,7 +140,8 @@ export default function HeroCarousel() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '350px',
+        height: 'clamp(280px, 35vh, 380px)',
+        minHeight: '280px',
         overflow: 'hidden',
       }}
     >
@@ -189,7 +190,7 @@ export default function HeroCarousel() {
                 width: '100%',
                 height: '100%',
                 background:
-                  'linear-gradient(135deg, rgba(255,102,0,0.15) 0%, rgba(255,133,51,0.12) 50%, rgba(255,170,102,0.1) 100%)',
+                  'linear-gradient(135deg, rgba(255,102,0,0.18) 0%, rgba(255,133,51,0.15) 50%, rgba(255,170,102,0.12) 100%)',
               }}
             />
 
@@ -201,111 +202,173 @@ export default function HeroCarousel() {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
-                padding: '20px 40px',
+                padding: 'clamp(12px, 2vh, 20px) clamp(12px, 2vw, 16px)',
                 textAlign: 'center',
                 color: 'white',
+                overflow: 'hidden',
               }}
             >
-              {/* Badge */}
+              {/* Contenu principal centré */}
               <div
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '6px 16px',
-                  borderRadius: '30px',
-                  marginBottom: '12px',
-                  fontSize: '13px',
-                  fontWeight: '600',
-                  color: 'white',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: '1',
+                  width: '100%',
+                  maxWidth: '800px',
                 }}
               >
-                {slide.badge}
+                {/* Badge */}
+                <div
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    backdropFilter: 'blur(10px)',
+                    padding: '5px 14px',
+                    borderRadius: '30px',
+                    marginBottom: '10px',
+                    fontSize: 'clamp(11px, 1.8vw, 13px)',
+                    fontWeight: '600',
+                    color: 'white',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    textShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                  }}
+                >
+                  {slide.badge}
+                </div>
+
+                {/* Titre principal */}
+                <h1
+                  style={{
+                    fontSize: 'clamp(20px, 4.5vw, 42px)',
+                    marginBottom: '6px',
+                    fontWeight: '800',
+                    color: 'white',
+                    lineHeight: '1.2',
+                    textShadow: '0 2px 20px rgba(0,0,0,0.5)',
+                    padding: '0 12px',
+                  }}
+                >
+                  {slide.mainTitle}
+                  <br />
+                  <span style={{ color: '#fff9e6', fontSize: 'clamp(18px, 4vw, 38px)' }}>{slide.subtitle}</span>
+                </h1>
+
+                {/* Description */}
+                <p
+                  style={{
+                    fontSize: 'clamp(12px, 1.8vw, 18px)',
+                    color: 'rgba(255, 255, 255, 0.95)',
+                    marginBottom: '8px',
+                    fontWeight: '500',
+                    textShadow: '0 2px 10px rgba(0,0,0,0.4)',
+                    padding: '0 12px',
+                    lineHeight: '1.4',
+                  }}
+                >
+                  {slide.description}
+                </p>
+
+                {/* Features */}
+                <p
+                  style={{
+                    fontSize: 'clamp(11px, 1.4vw, 13px)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    marginBottom: '12px',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.4)',
+                    padding: '0 12px',
+                  }}
+                >
+                  {slide.features}
+                </p>
               </div>
 
-              {/* Titre principal */}
-              <h1
-                style={{
-                  fontSize: 'clamp(28px, 4vw, 48px)',
-                  marginBottom: '8px',
-                  fontWeight: '800',
-                  color: 'white',
-                  lineHeight: '1.2',
-                  textShadow: '0 2px 20px rgba(0,0,0,0.2)',
-                }}
-              >
-                {slide.mainTitle}
-                <br />
-                <span style={{ color: '#fff9e6' }}>{slide.subtitle}</span>
-              </h1>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: 'clamp(16px, 1.8vw, 20px)',
-                  color: 'rgba(255, 255, 255, 0.95)',
-                  marginBottom: '10px',
-                  fontWeight: '500',
-                  textShadow: '0 2px 10px rgba(0,0,0,0.2)',
-                }}
-              >
-                {slide.description}
-              </p>
-
-              {/* Features */}
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  marginBottom: '20px',
-                  textShadow: '0 2px 10px rgba(0,0,0,0.2)',
-                }}
-              >
-                {slide.features}
-              </p>
-
-              {/* Info vendeur en bas */}
+              {/* Section basse avec vendeur et stats */}
               <div
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '12px 24px',
-                  borderRadius: '12px',
-                  marginTop: '12px',
-                  border: '2px solid rgba(255, 255, 255, 0.4)',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                  alignItems: 'center',
+                  marginTop: 'auto',
                 }}
               >
-                <h3
+                {/* Info vendeur */}
+                <div
                   style={{
-                    fontSize: 'clamp(20px, 2.5vw, 28px)',
-                    fontWeight: '800',
-                    marginBottom: '4px',
-                    textShadow: '0 2px 15px rgba(0,0,0,0.3)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    backdropFilter: 'blur(10px)',
+                    padding: '8px 16px',
+                    borderRadius: '10px',
+                    border: '2px solid rgba(255, 255, 255, 0.4)',
+                    width: '100%',
+                    maxWidth: '500px',
                   }}
                 >
-                  {slide.vendorTitle}
-                </h3>
-                <p
+                  <h3
+                    style={{
+                      fontSize: 'clamp(16px, 2.2vw, 24px)',
+                      fontWeight: '800',
+                      marginBottom: '3px',
+                      textShadow: '0 2px 15px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {slide.vendorTitle}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 'clamp(13px, 1.6vw, 17px)',
+                      fontWeight: '600',
+                      marginBottom: '3px',
+                      textShadow: '0 2px 10px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {slide.vendorSubtitle}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 'clamp(11px, 1.3vw, 13px)',
+                      fontWeight: '500',
+                      textShadow: '0 2px 8px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    ⭐ {slide.vendorOffer}
+                  </p>
+                </div>
+
+                {/* Stats intégrées dans le slide */}
+                <div
                   style={{
-                    fontSize: 'clamp(16px, 1.8vw, 20px)',
-                    fontWeight: '600',
-                    marginBottom: '4px',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: 'clamp(12px, 2.5vw, 24px)',
+                    flexWrap: 'wrap',
+                    padding: '6px 12px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    backdropFilter: 'blur(8px)',
+                    borderRadius: '10px',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    width: '100%',
+                    maxWidth: '500px',
                   }}
                 >
-                  {slide.vendorSubtitle}
-                </p>
-                <p
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  ⭐ {slide.vendorOffer}
-                </p>
+                  <div style={{ textAlign: 'center', minWidth: '55px' }}>
+                    <div style={{ fontSize: 'clamp(18px, 3vw, 24px)', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>7+</div>
+                    <div style={{ fontSize: 'clamp(9px, 1.3vw, 11px)', color: 'rgba(255,255,255,0.95)', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>Offres actives</div>
+                  </div>
+                  <div style={{ textAlign: 'center', minWidth: '55px' }}>
+                    <div style={{ fontSize: 'clamp(18px, 3vw, 24px)', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>1</div>
+                    <div style={{ fontSize: 'clamp(9px, 1.3vw, 11px)', color: 'rgba(255,255,255,0.95)', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>Ville</div>
+                  </div>
+                  <div style={{ textAlign: 'center', minWidth: '55px' }}>
+                    <div style={{ fontSize: 'clamp(18px, 3vw, 24px)', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>9</div>
+                    <div style={{ fontSize: 'clamp(9px, 1.3vw, 11px)', color: 'rgba(255,255,255,0.95)', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>Catégories</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -317,7 +380,7 @@ export default function HeroCarousel() {
         onClick={goToPrevious}
         style={{
           position: 'absolute',
-          left: '20px',
+          left: '8px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 10,
@@ -325,13 +388,13 @@ export default function HeroCarousel() {
           backdropFilter: 'blur(10px)',
           border: '2px solid rgba(255, 255, 255, 0.3)',
           borderRadius: '50%',
-          width: '50px',
-          height: '50px',
+          width: 'clamp(40px, 8vw, 50px)',
+          height: 'clamp(40px, 8vw, 50px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          fontSize: '24px',
+          fontSize: 'clamp(20px, 4vw, 24px)',
           color: 'white',
           transition: 'all 0.3s ease',
         }}
@@ -351,7 +414,7 @@ export default function HeroCarousel() {
         onClick={goToNext}
         style={{
           position: 'absolute',
-          right: '20px',
+          right: '8px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 10,
@@ -359,13 +422,13 @@ export default function HeroCarousel() {
           backdropFilter: 'blur(10px)',
           border: '2px solid rgba(255, 255, 255, 0.3)',
           borderRadius: '50%',
-          width: '50px',
-          height: '50px',
+          width: 'clamp(40px, 8vw, 50px)',
+          height: 'clamp(40px, 8vw, 50px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          fontSize: '24px',
+          fontSize: 'clamp(20px, 4vw, 24px)',
           color: 'white',
           transition: 'all 0.3s ease',
         }}

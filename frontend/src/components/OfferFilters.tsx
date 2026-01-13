@@ -37,12 +37,12 @@ export default function OfferFilters({
   return (
     <div
       style={{
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
-        padding: '28px',
+        background: 'linear-gradient(135deg, #ffffff 0%, #fafafa 100%)',
+        padding: '20px',
         borderRadius: '16px',
         marginBottom: '40px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-        border: '1px solid rgba(255, 102, 0, 0.1)',
+        boxShadow: '0 4px 20px rgba(44, 62, 80, 0.08)',
+        border: '1px solid rgba(255, 102, 0, 0.15)',
       }}
     >
       <div
@@ -58,7 +58,7 @@ export default function OfferFilters({
             width: '40px',
             height: '40px',
             borderRadius: '10px',
-            background: 'linear-gradient(135deg, #ff6600 0%, #ff8533 100%)',
+            background: 'linear-gradient(135deg, #FF6600 0%, #FF8533 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -71,7 +71,7 @@ export default function OfferFilters({
           style={{
             fontSize: '20px',
             fontWeight: '700',
-            color: '#333',
+            color: '#000000',
             margin: 0,
           }}
         >
@@ -82,7 +82,7 @@ export default function OfferFilters({
         style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '20px',
+          gap: '16px',
           alignItems: 'flex-end',
         }}
       >
@@ -97,7 +97,7 @@ export default function OfferFilters({
             style={{
               padding: '12px 18px',
               borderRadius: '10px',
-              border: '2px solid #e0e0e0',
+              border: '2px solid #E0E0E0',
               fontSize: '15px',
               cursor: 'pointer',
               backgroundColor: '#fff',
@@ -105,11 +105,11 @@ export default function OfferFilters({
               fontWeight: '500',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#ff6600';
-              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(255, 102, 0, 0.1)';
+              e.currentTarget.style.borderColor = '#FF6600';
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(255, 102, 0, 0.15)';
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = '#e0e0e0';
+              e.currentTarget.style.borderColor = '#E0E0E0';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -132,7 +132,7 @@ export default function OfferFilters({
             style={{
               padding: '12px 18px',
               borderRadius: '10px',
-              border: '2px solid #e0e0e0',
+              border: '2px solid #E0E0E0',
               fontSize: '15px',
               cursor: 'pointer',
               backgroundColor: '#fff',
@@ -140,11 +140,11 @@ export default function OfferFilters({
               fontWeight: '500',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = '#ff6600';
-              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(255, 102, 0, 0.1)';
+              e.currentTarget.style.borderColor = '#FF6600';
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(255, 102, 0, 0.15)';
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = '#e0e0e0';
+              e.currentTarget.style.borderColor = '#E0E0E0';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >

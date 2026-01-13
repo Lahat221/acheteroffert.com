@@ -116,21 +116,21 @@ export default function OffersList({ initialOffers }: OffersListProps) {
               ⭐
             </div>
             <div>
-              <h2
-                style={{
-                  fontSize: '32px',
-                  fontWeight: '800',
-                  color: '#333',
-                  margin: 0,
-                  background: 'linear-gradient(135deg, #ff6600 0%, #ff8533 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Bons Plans
-              </h2>
-              <p style={{ margin: '4px 0 0 0', color: '#666', fontSize: '14px' }}>
+            <h2
+              style={{
+                fontSize: 'clamp(24px, 4vw, 32px)',
+                fontWeight: '800',
+                color: '#000000',
+                margin: 0,
+                background: 'linear-gradient(135deg, #ff6600 0%, #ff8533 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Bons Plans
+            </h2>
+            <p style={{ margin: '4px 0 0 0', color: '#4A4A4A', fontSize: 'clamp(12px, 2vw, 14px)' }}>
                 Les meilleures offres sélectionnées pour vous
               </p>
             </div>
@@ -152,8 +152,8 @@ export default function OffersList({ initialOffers }: OffersListProps) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-              gap: '32px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gap: '24px',
             }}
           >
             {featuredOffers.map((offer, index) => (
@@ -170,15 +170,15 @@ export default function OffersList({ initialOffers }: OffersListProps) {
             <div style={{ marginBottom: '32px' }}>
               <h2
                 style={{
-                  fontSize: '28px',
+                  fontSize: 'clamp(22px, 3.5vw, 28px)',
                   fontWeight: '700',
-                  color: '#333',
+                  color: '#000000',
                   marginBottom: '8px',
                 }}
               >
                 📋 Toutes les offres
               </h2>
-              <p style={{ color: '#666', fontSize: '14px', margin: 0 }}>
+              <p style={{ color: '#4A4A4A', fontSize: 'clamp(12px, 2vw, 14px)', margin: 0 }}>
                 Explorez toutes nos offres disponibles
               </p>
             </div>
@@ -186,8 +186,8 @@ export default function OffersList({ initialOffers }: OffersListProps) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-              gap: '32px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gap: '24px',
             }}
           >
             {regularOffers.map((offer, index) => (

@@ -6,6 +6,7 @@
  */
 import { Offer } from '@/types/offer';
 import { ReservationRequest, ReservationResponse } from '@/types/reservation';
+import { API_URL } from '@/config/api';
 
 /**
  * Récupère la liste de toutes les offres disponibles
@@ -15,7 +16,7 @@ import { ReservationRequest, ReservationResponse } from '@/types/reservation';
 export async function getOffers(): Promise<Offer[]> {
   try {
     // Récupère les offres depuis l'API backend
-    const response = await fetch('http://localhost:3001/offers?active=true', {
+    const response = await fetch(`${API_URL}/offers?active=true`, {
       cache: 'no-store', // Force le rechargement à chaque fois pour les tests
     });
 

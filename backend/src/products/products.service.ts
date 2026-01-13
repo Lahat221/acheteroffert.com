@@ -75,10 +75,16 @@ export class ProductsService {
       active = true,
       page = 1,
       limit = 20,
+      vendorId,
     } = queryDto;
 
     // Construit la requête avec les filtres
     const queryBuilder = this.offerRepository.createQueryBuilder('offer');
+
+    // Filtre par vendeur si fourni
+    if (vendorId) {
+      queryBuilder.andWhere('offer.vendorId = :vendorId', { vendorId });
+    }
 
     // Filtre par ville si fourni
     if (city) {
@@ -104,9 +110,12 @@ export class ProductsService {
     // Note: Désactivé temporairement si la table reservations n'existe pas encore
     // queryBuilder.leftJoinAndSelect('offer.reservations', 'reservation');
 
-    // Pagination
-    const skip = (page - 1) * limit;
-    queryBuilder.skip(skip).take(limit);
+    // Pagination (seulement si limit est défini et > 0)
+    // Si limit = 0, on récupère toutes les offres sans pagination
+    if (limit !== undefined && limit > 0) {
+      const skip = (page - 1) * limit;
+      queryBuilder.skip(skip).take(limit);
+    }
 
     // Tri par date de création (plus récentes en premier)
     queryBuilder.orderBy('offer.createdAt', 'DESC');

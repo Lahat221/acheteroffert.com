@@ -46,7 +46,7 @@ export default function VendorRegisterPage() {
 
     try {
       // Appel à l'API backend pour créer le compte
-      const response = await fetch('http://localhost:3001/vendors/register', {
+      const response = await fetch(`${API_URL}/vendors/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -378,6 +378,7 @@ export default function VendorRegisterPage() {
     </div>
   );
 }
+
 
 
 

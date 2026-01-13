@@ -52,13 +52,23 @@ export class QueryOffersDto {
   /**
    * Nombre d'éléments par page
    * Par défaut : 20
+   * Utilisez limit=0 pour récupérer toutes les offres (sans pagination)
    */
   @IsNumber()
   @IsOptional()
   @Type(() => Number)
-  @Min(1)
+  @Min(0)
   limit?: number;
+
+  /**
+   * Filtrer par ID du vendeur
+   * Exemple : ?vendorId=uuid-du-vendeur
+   */
+  @IsString()
+  @IsOptional()
+  vendorId?: string;
 }
+
 
 
 

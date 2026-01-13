@@ -39,7 +39,7 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
   return (
     <div
       style={{
-        border: offer.isFeatured ? '2px solid #ff6600' : '1px solid #ddd',
+        border: offer.isFeatured ? '2px solid #FF6600' : '1px solid #E0E0E0',
         borderRadius: '12px',
         overflow: 'hidden',
         display: 'flex',
@@ -50,8 +50,8 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
         boxShadow: isHovered
           ? '0 8px 16px rgba(0,0,0,0.15)'
           : offer.isFeatured
-          ? '0 4px 12px rgba(255,102,0,0.2)'
-          : '0 2px 8px rgba(0,0,0,0.1)',
+          ? '0 4px 16px rgba(255, 102, 0, 0.25)'
+          : '0 2px 8px rgba(0, 0, 0, 0.08)',
         animation: `fadeInUp 0.6s ease ${index * 0.1}s both`,
         position: 'relative',
       }}
@@ -65,11 +65,11 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
             position: 'absolute',
             top: '12px',
             right: '12px',
-            backgroundColor: '#ff6600',
+            background: 'linear-gradient(135deg, #FF6600 0%, #FF8533 100%)',
             color: 'white',
             padding: '6px 12px',
             borderRadius: '20px',
-            fontSize: '12px',
+            fontSize: 'clamp(11px, 1.8vw, 12px)',
             fontWeight: 'bold',
             zIndex: 10,
             boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
@@ -90,7 +90,7 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
             color: 'white',
             padding: '6px 12px',
             borderRadius: '20px',
-            fontSize: '12px',
+            fontSize: 'clamp(11px, 1.8vw, 12px)',
             fontWeight: 'bold',
             zIndex: 10,
           }}
@@ -102,7 +102,7 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
       <div
         style={{
           width: '100%',
-          height: '200px',
+          height: 'clamp(180px, 25vw, 200px)',
           overflow: 'hidden',
           position: 'relative',
           backgroundColor: '#f0f0f0',
@@ -125,14 +125,14 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
           }}
         />
       </div>
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: 'clamp(16px, 3vw, 20px)' }}>
         {/* Catégorie */}
         <div
           style={{
             marginBottom: '8px',
-            fontSize: '12px',
+            fontSize: 'clamp(11px, 1.8vw, 12px)',
             fontWeight: '600',
-            color: '#ff6600',
+            color: '#FF6600',
           }}
         >
           {getCategoryLabel(offer.category)}
@@ -141,9 +141,9 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
         <h3
           style={{
             margin: '0 0 8px 0',
-            fontSize: '18px',
+            fontSize: 'clamp(16px, 2.5vw, 18px)',
             fontWeight: '600',
-            color: '#333',
+            color: '#000000',
           }}
         >
           {offer.title}
@@ -153,8 +153,8 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
           <p
             style={{
               margin: '0 0 12px 0',
-              color: '#666',
-              fontSize: '13px',
+              color: '#4A4A4A',
+              fontSize: 'clamp(12px, 2vw, 13px)',
               lineHeight: '1.4',
             }}
           >
@@ -167,10 +167,10 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
           style={{
             marginBottom: '12px',
             padding: '10px',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: '#F5F5F5',
             borderRadius: '6px',
-            fontSize: '12px',
-            color: '#555',
+            fontSize: 'clamp(11px, 1.8vw, 12px)',
+            color: '#4A4A4A',
           }}
         >
           <div style={{ marginBottom: '4px' }}>
@@ -191,8 +191,8 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
           <div
             style={{
               marginBottom: '12px',
-              fontSize: '13px',
-              color: stockLeft < 5 ? '#d32f2f' : '#666',
+              fontSize: 'clamp(12px, 2vw, 13px)',
+              color: stockLeft < 5 ? '#EF4444' : '#4A4A4A',
               fontWeight: '500',
             }}
           >
@@ -210,14 +210,16 @@ export default function OfferCard({ offer, index = 0 }: OfferCardProps) {
             display: 'inline-block',
             width: '100%',
             padding: '12px 24px',
-            backgroundColor: isValid && stockLeft !== 0
-              ? (isHovered ? '#ff6600' : '#0070f3')
-              : '#ccc',
+            background: isValid && stockLeft !== 0
+              ? (isHovered 
+                  ? 'linear-gradient(135deg, #FF8533 0%, #FF6600 100%)'
+                  : 'linear-gradient(135deg, #FF6600 0%, #FF8533 100%)')
+              : '#CCCCCC',
             color: 'white',
             border: 'none',
             borderRadius: '6px',
             cursor: isValid && stockLeft !== 0 ? 'pointer' : 'not-allowed',
-            fontSize: '14px',
+            fontSize: 'clamp(13px, 2.2vw, 14px)',
             fontWeight: '500',
             textDecoration: 'none',
             textAlign: 'center',

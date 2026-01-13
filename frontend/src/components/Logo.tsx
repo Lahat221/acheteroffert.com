@@ -16,7 +16,7 @@ interface LogoProps {
 export default function Logo({ size, width, height }: LogoProps) {
   // Dimensions du logo rectangulaire
   // Par défaut : hauteur max de 80px pour préserver les proportions du logo rectangulaire
-  const maxHeight = height || size || 1000;
+  const maxHeight = height || size || 80;
   
   // Liste des chemins possibles pour le logo
   const possiblePaths = [
@@ -76,7 +76,7 @@ export default function Logo({ size, width, height }: LogoProps) {
           maxHeight: `${maxHeight}px`,
           height: 'auto',
           width: 'auto',
-          maxWidth: '400px', // Largeur max pour les logos rectangulaires horizontaux
+          maxWidth: '200px', // Largeur max pour les logos rectangulaires horizontaux
           objectFit: 'contain',
           display: 'block',
           verticalAlign: 'middle',

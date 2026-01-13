@@ -74,3 +74,4 @@ Write-Host "=== Fin du diagnostic ===" -ForegroundColor Cyan
 
 
 
+
