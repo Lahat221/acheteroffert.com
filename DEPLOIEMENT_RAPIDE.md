@@ -7,9 +7,12 @@
 1. Allez sur [supabase.com](https://supabase.com) → Créez un compte
 2. **New Project** → Nom : `acheteroffert-test`
 3. Notez le mot de passe (important !)
-4. Dans **Settings** → **Database**, notez :
-   - Host : `db.xxxxx.supabase.co`
-   - Password : (celui que vous avez créé)
+4. Pour trouver le Host :
+   - Allez dans **Settings** (⚙️) → **Database**
+   - Cherchez la section **"Connection string"** ou **"Connection info"**
+   - Vous verrez une URL comme : `postgresql://postgres:[PASSWORD]@db.xxxxx.supabase.co:5432/postgres`
+   - Le **Host** est la partie `db.xxxxx.supabase.co`
+   - Notez aussi : Port `5432`, Database `postgres`, User `postgres`
 
 ### 2️⃣ Backend (10 min) - Railway
 
