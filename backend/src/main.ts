@@ -83,14 +83,15 @@ async function bootstrap() {
    * Récupère le port depuis la configuration
    * Par défaut : 3001
    */
-  const port = configService.get<number>('app.port', 3001);
+  const port = process.env.PORT || configService.get<number>('app.port', 3001);
+  await app.listen(port);
 
   /**
    * Démarre le serveur HTTP
    */
   await app.listen(port);
 
-  console.log(`Application demarree sur http://localhost:${port}`);
+  console.log(`Application demarree sur le port ${port}`);
   console.log(`Environnement : ${configService.get<string>('app.nodeEnv', 'development')}`);
 }
 
