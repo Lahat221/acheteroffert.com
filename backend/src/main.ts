@@ -83,8 +83,9 @@ async function bootstrap() {
    * Récupère le port depuis la configuration
    * Par défaut : 3001
    */
-  const port = process.env.PORT || configService.get<number>('app.port', 3001);
-  await app.listen(port);
+  const port = process.env.PORT || 3001;
+  await app.listen(port, '0.0.0.0');
+
 
   /**
    * Démarre le serveur HTTP
