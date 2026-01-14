@@ -189,3 +189,4 @@ En cas de problème :
 3. Vérifiez la console du navigateur (F12)
 4. Vérifiez que toutes les variables d'environnement sont correctes
 
+

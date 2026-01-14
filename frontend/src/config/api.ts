@@ -15,3 +15,4 @@ export function getApiUrl(path: string): string {
   return `${API_URL}/${cleanPath}`;
 }
 
+

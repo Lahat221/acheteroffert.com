@@ -36,3 +36,4 @@ Peux-tu me guider étape par étape en me demandant les infos au fur et à mesur
 2. Collez-le dans ChatGPT
 3. Suivez les instructions étape par étape
 
+

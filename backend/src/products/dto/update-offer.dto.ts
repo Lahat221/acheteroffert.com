@@ -17,3 +17,4 @@ export class UpdateOfferDto extends PartialType(CreateOfferDto) {}
 
 
 
+

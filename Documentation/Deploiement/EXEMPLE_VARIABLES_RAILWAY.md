@@ -46,3 +46,4 @@ JWT_SECRET=changez-moi-par-une-cle-aleatoire-longue
 - Remplacez `votre-mot-de-passe-supabase` par VOTRE mot de passe
 - Remplacez `FRONTEND_URL` après avoir déployé sur Vercel
 
+

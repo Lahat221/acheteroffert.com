@@ -139,3 +139,4 @@ Ce prompt donne à ChatGPT tout le contexte nécessaire pour vous guider efficac
 
 ChatGPT pourra ainsi vous donner des instructions précises et adaptées à votre situation.
 
+

@@ -106,3 +106,4 @@ Password : (celui que vous avez créé lors de la création du projet)
 2. Cela vous montrera aussi les informations de connexion
 3. Ou cherchez un onglet **"API"** dans Settings → il contient aussi les infos de connexion
 
+

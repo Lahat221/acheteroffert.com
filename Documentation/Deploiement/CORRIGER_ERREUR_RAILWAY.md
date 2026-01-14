@@ -65,3 +65,4 @@ Après correction, le déploiement devrait :
 2. Vérifiez que le dossier `backend` contient bien un `package.json`
 3. Vérifiez que toutes les dépendances sont dans `package.json`
 
+

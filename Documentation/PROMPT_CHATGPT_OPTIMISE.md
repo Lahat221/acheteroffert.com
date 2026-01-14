@@ -98,3 +98,4 @@ Préparez ces informations :
 
 Si ChatGPT vous demande quelque chose que vous ne savez pas, dites-lui simplement et il vous aidera à le trouver ou à le configurer.
 
+

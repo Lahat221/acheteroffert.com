@@ -62,3 +62,4 @@ Exécutez les migrations et seed depuis Railway terminal ou Supabase SQL Editor.
 - [ ] Base de données initialisée
 - [ ] Test des fonctionnalités
 
+

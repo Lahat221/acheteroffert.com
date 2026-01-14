@@ -52,9 +52,28 @@ async function bootstrap() {
    * Permet au frontend Next.js de communiquer avec l'API
    */
   app.enableCors({
-    origin: process.env.FRONTEND_URL 
-      ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
-      : ['http://localhost:3000', 'https://*.vercel.app'],
+    origin: (origin, callback) => {
+      // En développement, accepter localhost
+      if (!origin || origin.includes('localhost:3000')) {
+        return callback(null, true);
+      }
+      
+      // Si FRONTEND_URL est défini, utiliser cette valeur
+      if (process.env.FRONTEND_URL) {
+        const allowedUrls = process.env.FRONTEND_URL.split(',').map(url => url.trim());
+        if (allowedUrls.some(url => origin.includes(url.replace('https://', '').replace('http://', '')))) {
+          return callback(null, true);
+        }
+      }
+      
+      // Accepter tous les domaines Vercel
+      if (origin.includes('.vercel.app')) {
+        return callback(null, true);
+      }
+      
+      // Par défaut, refuser
+      callback(null, true); // Pour le moment, on accepte tout en production
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

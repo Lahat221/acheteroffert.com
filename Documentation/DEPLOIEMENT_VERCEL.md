@@ -283,3 +283,4 @@ Ils pourront tester toutes les fonctionnalités en ligne !
 - **Logs** : Consultez les logs en temps réel dans Railway/Render et Vercel
 - **Redéploiement** : Chaque push sur GitHub redéploie automatiquement
 
+

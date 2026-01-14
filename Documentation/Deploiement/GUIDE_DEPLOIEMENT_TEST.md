@@ -236,3 +236,4 @@ En cas de problème, vérifiez :
 - Les logs dans Vercel pour le frontend
 - La console du navigateur pour les erreurs frontend
 
+
