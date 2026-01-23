@@ -22,11 +22,15 @@ RUN npm run build
 # Optionnel : Supprime les devDependencies pour réduire la taille de l'image
 # RUN npm prune --production
 
+# Copie le script de démarrage avec migrations
+COPY scripts/start-with-migrations.sh ./
+RUN chmod +x start-with-migrations.sh
+
 # Expose le port
 EXPOSE 3001
 
-# Démarre l'application
-CMD ["npm", "run", "start:prod"]
+# Démarre l'application avec migrations automatiques
+CMD ["./start-with-migrations.sh"]
 
 
 
