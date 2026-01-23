@@ -35,8 +35,10 @@ export class ProductsService {
   async create(createOfferDto: CreateOfferDto): Promise<Offer> {
     try {
       // Convertit les dates string en objets Date si présentes
+      // S'assure que isActive est true par défaut si non spécifié
       const offerData = {
         ...createOfferDto,
+        isActive: createOfferDto.isActive !== undefined ? createOfferDto.isActive : true, // Par défaut : active
         validFrom: createOfferDto.validFrom ? new Date(createOfferDto.validFrom) : null,
         validUntil: createOfferDto.validUntil ? new Date(createOfferDto.validUntil) : null,
       };
