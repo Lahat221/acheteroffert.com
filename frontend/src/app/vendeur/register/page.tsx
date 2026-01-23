@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import { API_URL } from '@/config/api';
 
 export default function VendorRegisterPage() {
   const router = useRouter();
