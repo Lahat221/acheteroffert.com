@@ -23,29 +23,55 @@ config();
  * - Les migrations a executer (dans database/migrations/)
  * - Les options de synchronisation (desactivee en production)
  */
-export const databaseConfig: DataSourceOptions = {
-  type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432', 10),
-  username: process.env.DB_USERNAME || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_DATABASE || 'acheteroffert',
+function getDatabaseConfig(): DataSourceOptions {
+  // Utilise DATABASE_URL si disponible (Railway, Heroku, etc.)
+  const databaseUrl = process.env.DATABASE_URL;
   
-  // Chemins vers les entites (modeles de donnees)
-  entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+  if (databaseUrl) {
+    // Parse DATABASE_URL: postgresql://user:password@host:port/database
+    const url = new URL(databaseUrl);
+    return {
+      type: 'postgres',
+      host: url.hostname,
+      port: parseInt(url.port || '5432', 10),
+      username: url.username,
+      password: url.password,
+      database: url.pathname.slice(1), // Enlève le '/' du début
+      // Chemins vers les entites (modeles de donnees)
+      entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+      // Chemins vers les migrations
+      migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
+      // Synchronisation automatique (desactivee en production pour utiliser les migrations)
+      synchronize: process.env.NODE_ENV === 'development',
+      // Logging des requetes SQL (utile en developpement)
+      logging: process.env.NODE_ENV === 'development',
+      // Nom de la connexion
+      name: 'default',
+    };
+  }
   
-  // Chemins vers les migrations
-  migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
-  
-  // Synchronisation automatique (desactivee en production pour utiliser les migrations)
-  synchronize: process.env.NODE_ENV === 'development',
-  
-  // Logging des requetes SQL (utile en developpement)
-  logging: process.env.NODE_ENV === 'development',
-  
-  // Nom de la connexion
-  name: 'default',
-};
+  // Fallback sur les variables individuelles
+  return {
+    type: 'postgres',
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432', 10),
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_DATABASE || 'acheteroffert',
+    // Chemins vers les entites (modeles de donnees)
+    entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+    // Chemins vers les migrations
+    migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
+    // Synchronisation automatique (desactivee en production pour utiliser les migrations)
+    synchronize: process.env.NODE_ENV === 'development',
+    // Logging des requetes SQL (utile en developpement)
+    logging: process.env.NODE_ENV === 'development',
+    // Nom de la connexion
+    name: 'default',
+  };
+}
+
+export const databaseConfig: DataSourceOptions = getDatabaseConfig();
 
 /**
  * Instance DataSource pour les migrations

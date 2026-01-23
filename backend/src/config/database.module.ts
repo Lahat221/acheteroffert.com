@@ -29,23 +29,52 @@ import { Admin } from '../auth/entities/admin.entity';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get<string>('DB_HOST', 'localhost'),
-        port: configService.get<number>('DB_PORT', 5432),
-        username: configService.get<string>('DB_USERNAME', 'postgres'),
-        password: configService.get<string>('DB_PASSWORD', 'postgres'),
-        database: configService.get<string>('DB_DATABASE', 'acheteroffert'),
-        // Import explicite de toutes les entités (elles seront compilées par webpack)
-        entities: [Vendor, Offer, Reservation, QRCode, Subscription, Admin],
-        migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
-        // Désactive synchronize en production, utilise les migrations
-        synchronize: false, // Toujours false pour utiliser les migrations
-        logging: configService.get<string>('NODE_ENV') === 'development',
-        // Options supplémentaires pour améliorer la connexion
-        retryAttempts: 3,
-        retryDelay: 3000,
-      }),
+      useFactory: (configService: ConfigService) => {
+        // Utilise DATABASE_URL si disponible (Railway, Heroku, etc.)
+        // Sinon utilise les variables individuelles
+        const databaseUrl = configService.get<string>('DATABASE_URL');
+        
+        if (databaseUrl) {
+          // Parse DATABASE_URL: postgresql://user:password@host:port/database
+          const url = new URL(databaseUrl);
+          return {
+            type: 'postgres',
+            host: url.hostname,
+            port: parseInt(url.port || '5432', 10),
+            username: url.username,
+            password: url.password,
+            database: url.pathname.slice(1), // Enlève le '/' du début
+            // Import explicite de toutes les entités (elles seront compilées par webpack)
+            entities: [Vendor, Offer, Reservation, QRCode, Subscription, Admin],
+            migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
+            // Désactive synchronize en production, utilise les migrations
+            synchronize: false, // Toujours false pour utiliser les migrations
+            logging: configService.get<string>('NODE_ENV') === 'development',
+            // Options supplémentaires pour améliorer la connexion
+            retryAttempts: 3,
+            retryDelay: 3000,
+          };
+        }
+        
+        // Fallback sur les variables individuelles
+        return {
+          type: 'postgres',
+          host: configService.get<string>('DB_HOST', 'localhost'),
+          port: configService.get<number>('DB_PORT', 5432),
+          username: configService.get<string>('DB_USERNAME', 'postgres'),
+          password: configService.get<string>('DB_PASSWORD', 'postgres'),
+          database: configService.get<string>('DB_DATABASE', 'acheteroffert'),
+          // Import explicite de toutes les entités (elles seront compilées par webpack)
+          entities: [Vendor, Offer, Reservation, QRCode, Subscription, Admin],
+          migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
+          // Désactive synchronize en production, utilise les migrations
+          synchronize: false, // Toujours false pour utiliser les migrations
+          logging: configService.get<string>('NODE_ENV') === 'development',
+          // Options supplémentaires pour améliorer la connexion
+          retryAttempts: 3,
+          retryDelay: 3000,
+        };
+      },
     }),
   ],
 })
