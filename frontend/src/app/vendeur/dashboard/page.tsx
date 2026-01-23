@@ -403,15 +403,20 @@ export default function VendorDashboardPage() {
                           transition: 'transform 0.3s ease',
                         }}
                         onError={(e) => {
-                          e.currentTarget.src = 'https://via.placeholder.com/400x200?text=Offre';
+                          console.error('Erreur de chargement de l\'image:', offer.imageUrl);
+                          (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x200?text=Offre';
                         }}
+                        onLoad={() => {
+                          console.log('Image chargée avec succès:', offer.imageUrl);
+                        }}
+                        crossOrigin="anonymous"
                       />
                     </div>
                   ) : (
                     <div style={{ 
                       width: '100%', 
                       height: '220px', 
-                      backgroundColor: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
+                      background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
