@@ -31,19 +31,15 @@ import { Admin } from '../auth/entities/admin.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         // Utilise DATABASE_URL si disponible (Railway, Heroku, etc.)
-        // Sinon utilise les variables individuelles
+        // TypeORM supporte directement l'URL de connexion, ce qui évite les problèmes avec IPv6
         const databaseUrl = configService.get<string>('DATABASE_URL');
         
         if (databaseUrl) {
-          // Parse DATABASE_URL: postgresql://user:password@host:port/database
-          const url = new URL(databaseUrl);
+          // TypeORM peut utiliser directement l'URL de connexion
+          // Cela gère automatiquement IPv4, IPv6, et tous les formats
           return {
             type: 'postgres',
-            host: url.hostname,
-            port: parseInt(url.port || '5432', 10),
-            username: url.username,
-            password: url.password,
-            database: url.pathname.slice(1), // Enlève le '/' du début
+            url: databaseUrl, // Utilise directement l'URL (gère IPv4 et IPv6)
             // Import explicite de toutes les entités (elles seront compilées par webpack)
             entities: [Vendor, Offer, Reservation, QRCode, Subscription, Admin],
             migrations: [join(__dirname, '../../database/migrations/*{.ts,.js}')],
@@ -53,6 +49,10 @@ import { Admin } from '../auth/entities/admin.entity';
             // Options supplémentaires pour améliorer la connexion
             retryAttempts: 3,
             retryDelay: 3000,
+            // Force IPv4 si nécessaire (optionnel, TypeORM devrait gérer automatiquement)
+            extra: {
+              // Options de connexion supplémentaires pour pg (driver PostgreSQL)
+            },
           };
         }
         

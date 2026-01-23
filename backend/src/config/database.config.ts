@@ -28,15 +28,11 @@ function getDatabaseConfig(): DataSourceOptions {
   const databaseUrl = process.env.DATABASE_URL;
   
   if (databaseUrl) {
-    // Parse DATABASE_URL: postgresql://user:password@host:port/database
-    const url = new URL(databaseUrl);
+    // TypeORM peut utiliser directement l'URL de connexion
+    // Cela gère automatiquement IPv4, IPv6, et tous les formats
     return {
       type: 'postgres',
-      host: url.hostname,
-      port: parseInt(url.port || '5432', 10),
-      username: url.username,
-      password: url.password,
-      database: url.pathname.slice(1), // Enlève le '/' du début
+      url: databaseUrl, // Utilise directement l'URL (gère IPv4 et IPv6)
       // Chemins vers les entites (modeles de donnees)
       entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
       // Chemins vers les migrations
