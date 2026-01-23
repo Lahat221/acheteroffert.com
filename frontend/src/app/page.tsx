@@ -19,9 +19,14 @@ import Testimonials from '@/components/Testimonials';
  * Composant de la page d'accueil
  * C'est un Server Component (pas de 'use client')
  * Les données sont récupérées côté serveur pour de meilleures performances
+ * 
+ * revalidate: 0 désactive le cache pour que les nouvelles offres apparaissent immédiatement
  */
+export const revalidate = 0; // Désactive le cache pour afficher les nouvelles offres immédiatement
+
 export default async function HomePage() {
-  // Récupère les offres depuis l'API (mock pour l'instant)
+  // Récupère les offres depuis l'API
+  // Utilise revalidate: 0 pour forcer le rechargement à chaque requête
   const offers = await getOffers();
   
   // Récupère les témoignages (données statiques pour l'instant)

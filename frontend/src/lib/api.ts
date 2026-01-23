@@ -16,8 +16,9 @@ import { API_URL } from '@/config/api';
 export async function getOffers(): Promise<Offer[]> {
   try {
     // Récupère les offres depuis l'API backend
+    // Utilise cache: 'no-store' pour forcer le rechargement à chaque fois
     const response = await fetch(`${API_URL}/offers?active=true`, {
-      cache: 'no-store', // Force le rechargement à chaque fois pour les tests
+      cache: 'no-store', // Force le rechargement à chaque fois (pas de cache)
     });
 
     if (!response.ok) {
