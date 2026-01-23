@@ -82,15 +82,15 @@ async function bootstrap() {
   /**
    * Récupère le port depuis la configuration
    * Par défaut : 3001
+   * Railway fournit automatiquement le port via la variable d'environnement PORT
    */
-  const port = process.env.PORT || 3001;
-  await app.listen(port, '0.0.0.0');
-
-
+  const port = process.env.PORT || configService.get<number>('app.port', 3001);
+  
   /**
    * Démarre le serveur HTTP
+   * '0.0.0.0' permet d'écouter sur toutes les interfaces réseau (nécessaire pour Railway/Docker)
    */
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   console.log(`Application demarree sur le port ${port}`);
   console.log(`Environnement : ${configService.get<string>('app.nodeEnv', 'development')}`);
