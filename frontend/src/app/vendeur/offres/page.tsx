@@ -112,7 +112,7 @@ export default function VendorOffersPage() {
     }
   };
 
-  const categories = Array.from(new Set(offers.map(o => o.category).filter(Boolean)));
+  const categories = Array.from(new Set(offers.map(o => o.category).filter((cat): cat is string => Boolean(cat))));
 
   if (loading || !vendor) {
     return (
