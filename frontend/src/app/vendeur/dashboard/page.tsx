@@ -599,102 +599,213 @@ export default function VendorDashboardPage() {
             </div>
           </div>
 
-              {/* Liste de toutes les offres */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
-                {offers.map((offer) => (
-                  <div key={offer.id} style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', border: offer.isActive ? '2px solid transparent' : '2px solid #e0e0e0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                    {/* Image de l'offre */}
-                    {offer.imageUrl && (
-                      <div style={{ width: '100%', height: '200px', overflow: 'hidden', backgroundColor: '#f0f0f0', position: 'relative' }}>
-                        <img
-                          src={offer.imageUrl}
-                          alt={offer.title}
+          {/* Graphique en barres - Répartition par catégorie */}
+          {offers.length > 0 && (
+            <>
+              <div style={{ marginBottom: '40px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#333', marginBottom: '24px' }}>
+                  📈 Répartition par catégorie
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {Array.from(new Set(offers.map(o => o.category).filter(Boolean))).map(category => {
+                    const categoryOffers = offers.filter(o => o.category === category);
+                    const percentage = offers.length > 0 ? (categoryOffers.length / offers.length) * 100 : 0;
+                    return (
+                      <div key={category}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '15px', fontWeight: '600', color: '#333' }}>
+                            {category || 'Sans catégorie'}
+                          </span>
+                          <span style={{ fontSize: '15px', color: '#666', fontWeight: '600' }}>
+                            {categoryOffers.length} ({percentage.toFixed(0)}%)
+                          </span>
+                        </div>
+                        <div style={{ width: '100%', height: '28px', backgroundColor: '#f0f0f0', borderRadius: '14px', overflow: 'hidden' }}>
+                          <div
+                            style={{
+                              width: `${percentage}%`,
+                              height: '100%',
+                              background: 'linear-gradient(90deg, #ff6600 0%, #ff8533 100%)',
+                              borderRadius: '14px',
+                              transition: 'width 0.5s ease',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'flex-end',
+                              paddingRight: '12px',
+                            }}
+                          >
+                            {percentage > 10 && (
+                              <span style={{ color: 'white', fontSize: '13px', fontWeight: '700' }}>
+                                {categoryOffers.length}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Graphique circulaire - Statut des offres */}
+              <div style={{ marginBottom: '40px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#333', marginBottom: '24px' }}>
+                  🎯 Statut des offres
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '30px' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ 
+                      width: '140px', 
+                      height: '140px', 
+                      borderRadius: '50%', 
+                      background: `conic-gradient(#10B981 0% ${offers.length > 0 ? (offers.filter(o => o.isActive).length / offers.length) * 100 : 0}%, #f0f0f0 ${offers.length > 0 ? (offers.filter(o => o.isActive).length / offers.length) * 100 : 0}% 100%)`,
+                      margin: '0 auto 20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)',
+                    }}>
+                      <div style={{ 
+                        width: '100px', 
+                        height: '100px', 
+                        borderRadius: '50%', 
+                        backgroundColor: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '28px',
+                        fontWeight: 'bold',
+                        color: '#10B981',
+                      }}>
+                        {offers.length > 0 ? Math.round((offers.filter(o => o.isActive).length / offers.length) * 100) : 0}%
+                      </div>
+                    </div>
+                    <div style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '5px' }}>Actives</div>
+                    <div style={{ fontSize: '15px', color: '#666' }}>{offers.filter(o => o.isActive).length} offres</div>
+                  </div>
+                  
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ 
+                      width: '140px', 
+                      height: '140px', 
+                      borderRadius: '50%', 
+                      background: `conic-gradient(#F59E0B 0% ${offers.length > 0 ? (offers.filter(o => !o.isActive).length / offers.length) * 100 : 0}%, #f0f0f0 ${offers.length > 0 ? (offers.filter(o => !o.isActive).length / offers.length) * 100 : 0}% 100%)`,
+                      margin: '0 auto 20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      boxShadow: '0 4px 12px rgba(245, 158, 11, 0.2)',
+                    }}>
+                      <div style={{ 
+                        width: '100px', 
+                        height: '100px', 
+                        borderRadius: '50%', 
+                        backgroundColor: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '28px',
+                        fontWeight: 'bold',
+                        color: '#F59E0B',
+                      }}>
+                        {offers.length > 0 ? Math.round((offers.filter(o => !o.isActive).length / offers.length) * 100) : 0}%
+                      </div>
+                    </div>
+                    <div style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '5px' }}>Inactives</div>
+                    <div style={{ fontSize: '15px', color: '#666' }}>{offers.filter(o => !o.isActive).length} offres</div>
+                  </div>
+
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ 
+                      width: '140px', 
+                      height: '140px', 
+                      borderRadius: '50%', 
+                      background: `conic-gradient(#ff6600 0% ${offers.length > 0 ? (offers.filter(o => o.isFeatured).length / offers.length) * 100 : 0}%, #f0f0f0 ${offers.length > 0 ? (offers.filter(o => o.isFeatured).length / offers.length) * 100 : 0}% 100%)`,
+                      margin: '0 auto 20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      boxShadow: '0 4px 12px rgba(255, 102, 0, 0.2)',
+                    }}>
+                      <div style={{ 
+                        width: '100px', 
+                        height: '100px', 
+                        borderRadius: '50%', 
+                        backgroundColor: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '28px',
+                        fontWeight: 'bold',
+                        color: '#ff6600',
+                      }}>
+                        {offers.length > 0 ? Math.round((offers.filter(o => o.isFeatured).length / offers.length) * 100) : 0}%
+                      </div>
+                    </div>
+                    <div style={{ fontSize: '18px', fontWeight: '700', color: '#333', marginBottom: '5px' }}>Bons plans</div>
+                    <div style={{ fontSize: '15px', color: '#666' }}>{offers.filter(o => o.isFeatured).length} offres</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Graphique temporel - Offres créées par jour */}
+              <div>
+                <h3 style={{ fontSize: '20px', fontWeight: '600', color: '#333', marginBottom: '24px' }}>
+                  📅 Évolution (7 derniers jours)
+                </h3>
+                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '220px', padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '12px' }}>
+                  {Array.from({ length: 7 }, (_, i) => {
+                    const date = new Date();
+                    date.setDate(date.getDate() - (6 - i));
+                    const dayOffers = offers.filter(o => {
+                      const offerDate = new Date(o.createdAt);
+                      return offerDate.toDateString() === date.toDateString();
+                    });
+                    const maxOffers = Math.max(...Array.from({ length: 7 }, (_, j) => {
+                      const d = new Date();
+                      d.setDate(d.getDate() - (6 - j));
+                      return offers.filter(o => {
+                        const offerDate = new Date(o.createdAt);
+                        return offerDate.toDateString() === d.toDateString();
+                      }).length;
+                    }), 1);
+                    const height = (dayOffers.length / maxOffers) * 100;
+                    
+                    return (
+                      <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div
                           style={{
                             width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            transition: 'transform 0.3s ease',
+                            height: `${height}%`,
+                            minHeight: dayOffers.length > 0 ? '30px' : '0',
+                            background: dayOffers.length > 0 
+                              ? 'linear-gradient(180deg, #ff6600 0%, #ff8533 100%)' 
+                              : '#e0e0e0',
+                            borderRadius: '8px 8px 0 0',
+                            marginBottom: '12px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontWeight: '700',
+                            fontSize: '14px',
+                            transition: 'all 0.3s ease',
+                            boxShadow: dayOffers.length > 0 ? '0 2px 8px rgba(255, 102, 0, 0.3)' : 'none',
                           }}
-                          onError={(e) => {
-                            // Si l'image ne charge pas, affiche un placeholder
-                            e.currentTarget.src = 'https://via.placeholder.com/400x200?text=Offre';
-                          }}
-                        />
-                        {!offer.isActive && (
-                          <div style={{ position: 'absolute', top: '10px', right: '10px', padding: '4px 8px', backgroundColor: 'rgba(0,0,0,0.7)', color: 'white', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
-                            Inactive
-                          </div>
-                        )}
-                        {offer.isFeatured && (
-                          <div style={{ position: 'absolute', top: '10px', left: '10px', padding: '4px 12px', backgroundColor: '#ff6600', color: 'white', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
-                            ⭐ Bon plan
-                          </div>
-                        )}
+                          title={`${dayOffers.length} offre(s) le ${date.toLocaleDateString('fr-FR')}`}
+                        >
+                          {dayOffers.length > 0 && dayOffers.length}
+                        </div>
+                        <div style={{ fontSize: '12px', color: '#666', textAlign: 'center', fontWeight: '600' }}>
+                          {date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' })}
+                        </div>
                       </div>
-                    )}
-                    <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10px' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#333', margin: 0, flex: 1 }}>
-                          {offer.title}
-                        </h3>
-                        {!offer.imageUrl && !offer.isActive && (
-                          <span style={{ padding: '4px 8px', backgroundColor: '#e0e0e0', color: '#666', borderRadius: '4px', fontSize: '11px', fontWeight: '600', marginLeft: '10px' }}>
-                            Inactive
-                          </span>
-                        )}
-                      </div>
-                      <p style={{ color: '#666', fontSize: '14px', marginBottom: '10px' }}>
-                        {offer.category || 'Sans catégorie'} • {offer.city}
-                      </p>
-                      {offer.description && (
-                        <p style={{ color: '#888', fontSize: '13px', marginBottom: '10px', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1 }}>
-                          {offer.description}
-                        </p>
-                      )}
-                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '15px' }}>
-                        {!offer.imageUrl && offer.isFeatured && (
-                          <span style={{ display: 'inline-block', padding: '4px 12px', backgroundColor: '#ff6600', color: 'white', borderRadius: '4px', fontSize: '12px', fontWeight: '600' }}>
-                            ⭐ Bon plan
-                          </span>
-                        )}
-                        {offer.maxReservations && (
-                          <span style={{ display: 'inline-block', padding: '4px 12px', backgroundColor: '#f0f0f0', color: '#666', borderRadius: '4px', fontSize: '12px' }}>
-                            Max: {offer.maxReservations}
-                          </span>
-                        )}
-                      </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '15px', borderTop: '1px solid #f0f0f0', gap: '10px', flexWrap: 'wrap' }}>
-                      <Link
-                        href={`/vendeur/offres/${offer.id}`}
-                        style={{
-                          color: '#ff6600',
-                          textDecoration: 'none',
-                          fontWeight: '600',
-                          fontSize: '14px',
-                          padding: '8px 16px',
-                          backgroundColor: '#fff5f0',
-                          borderRadius: '6px',
-                          transition: 'all 0.3s',
-                          display: 'inline-block',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#ff6600';
-                          e.currentTarget.style.color = 'white';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#fff5f0';
-                          e.currentTarget.style.color = '#ff6600';
-                        }}
-                      >
-                        📋 Gérer
-                      </Link>
-                      <span style={{ color: '#999', fontSize: '12px' }}>
-                        {new Date(offer.createdAt).toLocaleDateString('fr-FR')}
-                      </span>
-                    </div>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  })}
+                </div>
               </div>
             </>
           )}
