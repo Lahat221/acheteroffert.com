@@ -11,13 +11,19 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 async function seedDatabase() {
-  const client = new Client({
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432', 10),
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
-    database: process.env.DB_DATABASE || 'acheteroffert',
-  });
+  // Utilise DATABASE_URL si disponible (Railway, Heroku, etc.)
+  // Sinon, utilise les variables individuelles
+  const client = new Client(
+    process.env.DATABASE_URL
+      ? { connectionString: process.env.DATABASE_URL }
+      : {
+          host: process.env.DB_HOST || 'localhost',
+          port: parseInt(process.env.DB_PORT || '5432', 10),
+          user: process.env.DB_USERNAME || 'postgres',
+          password: process.env.DB_PASSWORD || 'postgres',
+          database: process.env.DB_DATABASE || 'acheteroffert',
+        }
+  );
 
   try {
     console.log('🔌 Connexion à la base de données...');
